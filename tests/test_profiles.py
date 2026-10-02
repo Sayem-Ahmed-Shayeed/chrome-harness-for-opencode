@@ -25,3 +25,14 @@ def test_open_profile_builds_argv(monkeypatch, tmp_path):
 def test_current_profile_roundtrip(monkeypatch, tmp_path):
     monkeypatch.setattr(profiles, "LAST_PROFILE_FILE", str(tmp_path / "last"))
     assert profiles.current_profile() is None
+
+
+def test_list_profiles_missing_raises_with_path(monkeypatch, tmp_path):
+    missing = str(tmp_path / "Local State")
+    monkeypatch.setattr(profiles, "LOCAL_STATE", missing)
+    try:
+        profiles.list_profiles()
+    except RuntimeError as e:
+        assert missing in str(e)
+    else:
+        raise AssertionError("expected RuntimeError")

@@ -19,6 +19,7 @@ def _helpers():
         "snap": snap, "text": text, "shot": shot, "js": js,
         "errors_of": errors_of, "ws_call": ws_call,
         "nav": nav, "open_url": open_url,
+        "close_target": hands.close_target,
         "click_xy": hands.click_xy, "fill_js": hands.fill_js,
         "press_key": hands.press_key,
     }

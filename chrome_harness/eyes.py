@@ -51,8 +51,11 @@ def text(ws_url):
 
 def shot(ws_url, path):
     r = ws_call(ws_url, "Page.captureScreenshot", {"format": "png"})
+    data = r.get("data")
+    if not data:
+        raise RuntimeError("Page.captureScreenshot returned no data")
     with open(path, "wb") as f:
-        f.write(base64.b64decode(r["data"]))
+        f.write(base64.b64decode(data))
     return path
 
 

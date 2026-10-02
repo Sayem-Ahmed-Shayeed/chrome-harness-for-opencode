@@ -9,8 +9,11 @@ LAST_PROFILE_FILE = os.path.expanduser("~/.cache/chrome-harness/last_profile")
 
 
 def list_profiles():
-    with open(LOCAL_STATE) as f:
-        info = json.load(f)["profile"]["info_cache"]
+    try:
+        with open(LOCAL_STATE) as f:
+            info = json.load(f)["profile"]["info_cache"]
+    except (OSError, ValueError, KeyError) as e:
+        raise RuntimeError(f"cannot read Chrome Local State at {LOCAL_STATE}: {e}") from e
     return [
         {"directory": k, "name": v.get("name", k), "email": v.get("user_name", "")}
         for k, v in sorted(info.items())

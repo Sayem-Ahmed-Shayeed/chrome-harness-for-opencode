@@ -1,0 +1,13 @@
+[project]
+name = "chrome-harness"
+version = "1.0.0"
+description = "Phone-harness-style control of visible desktop Chrome via CDP"
+requires-python = ">=3.10"
+dependencies = ["websocket-client>=1.8"]
+
+[project.scripts]
+chrome-harness = "chrome_harness.cli:main"
+
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
