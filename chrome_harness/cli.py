@@ -25,7 +25,8 @@ def _helpers():
 
 
 def main(argv=None):
-    if not sys.stdin.isatty():
+    args = list(sys.argv[1:] if argv is None else argv)
+    if not args and not sys.stdin.isatty():
         exec(sys.stdin.read(), dict(_helpers()))  # noqa: S102 - local harness by design
         return 0
     ap = argparse.ArgumentParser(prog="chrome-harness")
